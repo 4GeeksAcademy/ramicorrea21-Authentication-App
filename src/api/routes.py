@@ -51,4 +51,7 @@ def login():
         else:
             return({"message":"bad credentials"}), 400
     
-
+@api.route('/users', methods=['GET'])
+def get_users():
+    users = User.query.all()
+    return jsonify(list(map(lambda user : user.serialize(), users )))

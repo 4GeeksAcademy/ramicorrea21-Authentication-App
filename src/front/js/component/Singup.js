@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { useContext } from 'react'
 import { Context } from '../store/appContext'
+
 export const Singup = () =>{
-    const {actions} = useContext(Context)
+    const {actions, store} = useContext(Context)
 
 
     const [user, setUser] = useState({
@@ -20,6 +21,10 @@ export const Singup = () =>{
     const handleSubmit = (e) =>{
         e.preventDefault()
         actions.singup(user)
+        const registered = store.usersRegistered?.find((usr) => usr.email === user.email)
+        if(registered != undefined){
+            console.log(registered)
+        }
     }
 
     return(

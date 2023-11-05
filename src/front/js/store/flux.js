@@ -13,8 +13,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				},
-
-			]
+			],
+			usersRegistered:[]
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -59,13 +59,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 						body: JSON.stringify(credentials)
 					}
 					)
-					console.log(response)
+				console.log(response.json())
+				if(response.status === 201){
+					getActions().getUsers()
+				}
 				} catch (error) {
 					console.log(error)
 				}
-
-
+			},
+			getUsers: () =>{
+				let url = process.env.BACKEND_URL +"api/users"
+				fetch(url)
+				.then(res => res.json())
+				.then(data => setStore({
+					usersRegistered : data
+				}))
 			}
+
 
 		}
 	};
