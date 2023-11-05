@@ -1,3 +1,5 @@
+
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -14,7 +16,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				},
 			],
-			usersRegistered:[]
+			usersRegistered:[],
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -62,6 +64,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(response.json())
 				if(response.status === 201){
 					getActions().getUsers()
+				}
+				if(response.status === 400){
+					alert("USER ALREADY EXISTS")
 				}
 				} catch (error) {
 					console.log(error)
